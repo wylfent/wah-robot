@@ -1,0 +1,16 @@
+{
+    "imagePath": "R:/wah-robot/profiles/squirtle.jpg",
+    "id": "0007",
+    "prefixTh": "นาย",
+    "nameTh": "สควอทเทิล",
+    "lastnameTh": "เป็นเต่า",
+    "prefixEn": "MR",
+    "nameEn": "Squirtle",
+    "lastnameEn": "The Turtle",
+    "email": "squirtle@turtlemail.com",
+    "address": "Some pond in Thailand",
+    "x": "0",
+    "y": "0",
+    "width": "1024",
+    "height": "720"
+}
