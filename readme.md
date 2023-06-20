@@ -43,7 +43,7 @@ npm run start -- "R:/path/to/profile/profile.json"
 
 The robot will keep in waiting state until 8.59AM. Then it will start to load the register page.
 
-The robot will automatically reload the register page if there's any connection problem, then fill and submit the form. If the submission request is failed, the browser will retry itself for a while. However, if it keep failed til timeout, you need to refresh the page to resubmit the form yourself.
+The robot will automatically reload the register page if there's any connection problem or the form is not yet ready. Then it will fill and submit the form. If the submission request is failed, the browser will retry itself for a while. However, if it keep failed til timeout, you need to refresh the page to resubmit the form yourself.
 
 ## Run Your Robot (without submit)
 
@@ -52,6 +52,12 @@ To check the input information - you could run the robot in test mode by the fol
 ```bash
 npm run start -- "R:/path/to/profile/profile.json" true
 ```
+
+The robot will only fill the form as show in the following image.
+
+![Sample Form](./images/sample-form.png "Sample Form")
+
+If you need to submit the form, you could click the button yourself.
 
 
 # WAH Autofill Console Script
