@@ -40,7 +40,7 @@ async function getRegisteredNo(page) {
     return noHandle.toString()
 }
 
-async function fillForm(page, info) {
+async function fillRegisterForm(page, info) {
     const [fileChooser] = await Promise.all([
         page.waitForFileChooser(),
         page.click('[name="fileUpload"')
@@ -51,16 +51,30 @@ async function fillForm(page, info) {
 }
 
 async function submitForm(page) {
-    try {
-        console.log('Submitting form')
-        page.click('[name="btLogin"]')
-        page.once('dialog', dialog => {
-            const message = dialog.message()
-            console.log('Get dialog -', message)
-        })
-        await page.waitForResponse(response => response.url().startsWith(WAH_URL), { timeout: 0 });
-    } catch (error) {
-        console.error('Error while submitting form - reload the page yourself', error.message)
+    console.log('Submitting form')
+    page.click('[name="btLogin"]')
+    let responseMessage = ''
+    page.once('dialog', dialog => {
+        const message = dialog.message()
+        console.log('Get dialog -', message)
+        responseMessage = message
+    })
+    let attempt = 0
+    while (true) {
+        attempt++
+        try {
+            await page.waitForNavigation({ waitUntil: 'networkidle0' })
+            await page.waitForSelector('#btLogin', { timeout: 200 }) // will throw if no submit button - which it hasn't yet 9AM
+            break
+        } catch (error) {
+            if (responseMessage) {
+                console.log(`Already submitted - ${responseMessage}`)
+                break
+            }
+            console.error('Error while submitting form', error.message)
+            console.error(`Resubmitting - attempt: ${attempt}`)
+            page.evaluate(() => window.reloadButtonClick())
+        }
     }
 }
 
@@ -74,7 +88,7 @@ async function run() {
     }
     console.log('Running..')
     const page = await openForm(profile)
-    await fillForm(page, profile)
+    await fillRegisterForm(page, profile)
     if (!isTest) {
         await submitForm(page)
     }
