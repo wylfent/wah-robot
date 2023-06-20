@@ -50,7 +50,7 @@ The robot will automatically reload the register page if there's any connection 
 To check the input information - you could run the robot in test mode by the following command.
 
 ```bash
-npm run start -- "R:/path/to/profile/profile.json" test
+npm run start -- "R:/path/to/profile/profile.json" true
 ```
 
 
