@@ -74,7 +74,7 @@ async function submitForm(page) {
             }
             console.error('Error while submitting form', error.message)
             console.error(`Resubmitting - attempt: ${attempt}`)
-            page.evaluate(() => window.reloadButtonClick())
+            await page.evaluate(() => window.location.reload())
         }
     }
 }
