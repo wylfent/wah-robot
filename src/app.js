@@ -47,7 +47,8 @@ async function fillRegisterForm(page, info) {
     ])
     await fileChooser.accept([info.imagePath])
     page.evaluate(autoFillWahForm, info)
-    console.log('Filled form')
+    page.screenshot({ path: `${info.nameEn}.png`, fullPage: true })
+    console.log('Filled form - saving screenshot...')
 }
 
 async function submitForm(page) {
